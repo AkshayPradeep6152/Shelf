@@ -6,8 +6,7 @@ import 'package:shelf/components/already_have_an_account.dart';
 import 'package:shelf/components/rounded_button.dart';
 import 'package:shelf/components/rounded_input_field.dart';
 import 'package:shelf/components/rounded_password_field.dart';
-import 'package:shelf/constants.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 import 'package:shelf/providers/login_auth.dart';
 import 'package:shelf/size_config.dart';
 
@@ -37,6 +36,7 @@ class _BodyState extends State<Body> {
             child:
                 Image.asset("assets/images/login.png", width: size.width * 1),
           ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -109,25 +109,20 @@ class _BodyState extends State<Body> {
           ),
           RoundedPasswordField(
               controller: passwordController, onChanged: (value) {}),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 60),
-                child: TextButton(
-                  child: Text("Forgot Password?",
-                      style: TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.normal)),
-                  onPressed: () async {
-                    final url = '$baseUrl/password_reset/';
-                    print(url);
-                    openBrowserURL(url: url, inApp: true);
-                  },
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: SizeConfig.blockSizeVertical * 4.5),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.end,
+          //   children: [
+          //     Container(
+          //       margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
+          //       child: Text(
+          //         "Forgot Password?",
+          //         style:
+          //             TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          SizedBox(height: SizeConfig.blockSizeVertical * 7.5),
           AlreadyHaveAnAccountCheck(
             press: () {
               Navigator.push(
@@ -146,20 +141,6 @@ class _BodyState extends State<Body> {
               }),
         ],
       ),
-    );
-  }
-}
-
-Future openBrowserURL({
-  required String url,
-  bool inApp = false,
-}) async {
-  if (await canLaunch(url)) {
-    await launch(
-      url,
-      forceSafariVC: inApp,
-      forceWebView: inApp,
-      enableJavaScript: true,
     );
   }
 }
